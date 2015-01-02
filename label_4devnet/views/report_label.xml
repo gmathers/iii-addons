@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="report_label_1">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o1">
+					<div class="page">
+						<table>
+							<tbody>
+								<tr>
+									<td style="font-family:arial;text-align:left;font-weight:bold;font-size:34px;">
+										<span t-field="o1.partner_id"/><br/>
+									</td>
+								</tr>
+								<tr>
+									<br/><td style="padding-top:20px;font-family:arial;text-align:left;font-weight:bold;font-size:72px;">
+									<span t-field="o1.name"/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</t>
+	</template>
+</data>
+</openerp>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<report 
+            string="Custom-Label 4*2" 
+            id="report_label" 
+            model="sale.order" 
+            report_type="qweb-pdf"
+            name="label_4devnet.report_label_1" 
+            file="label_4devnet.report_label"
+    		/>  
+         
+    		<report 
+            string="Custom-Label 6*4" 
+            id="report_label2" 
+            model="sale.order" 
+            report_type="qweb-pdf"
+            name="label_4devnet.report_label-2" 
+            file="label_4devnet.report_label_2" />
+    			
+           <report 
+            header="False"
+            string="Custom-Label 4*1" 
+            id="partner_label" 
+            model="res.partner" 
+            report_type="qweb-pdf"
+            name="label_4devnet.report_partner_label" 
+            file="label_4devnet.partner_label"/>  	 
+    		
+   	
+	</data>
+</openerp>
+
