@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data noupdate="0">
+    <data noupdate="1">
         <!--paperformat_id="report_page_1"-->
         <record id="report_page_1" model="report.paperformat">           
             <field name="name">Label 4*2</field>
@@ -17,15 +17,16 @@
             <field name="dpi">90</field>
             <field name="report_ids">Custom-Label 4*2</field>            
         </record>
-        <!--<record id="paper_1" model="ir.actions.report.xml"> 
+        <record id="report_label_1" model="ir.actions.report.xml"> 
         	<field name="name">Custom-Label 4*2</field>
         	<field name="model">sale.order</field>
         	<field name="report_type">qweb-pdf</field>
-        	<field name="report_name">label_4devnet.report_label_1</field>
+        	<field name="report_name">label_4devnet.report_label</field>
         	<field name="paperformat_id" ref="report_page_1"/>
-        	<field name="id">report_label</field>
-        	<field name="report_file" ref="report_label"/> 
-        </record> -->
+		<field name="report_file">label_4devnet.report_label</field>
+        	<!--<field name="id">report_label</field>
+        	<field name="report_file" ref="report_label"/> -->
+        </record> 
         
         <record id="report_page_2" model="report.paperformat">           
             <field name="name">Label 6*4</field>
@@ -42,13 +43,14 @@
             <field name="dpi">90</field>
             <field name="report_ids">Custom-Label 6*4</field>            
         </record> 
-       <!--  <record id="paper_2" model="ir.actions.report.xml"> 
+         <record id="report_label2" model="ir.actions.report.xml"> 
         	<field name="name">Custom-Label 6*4</field>
         	<field name="model">sale.order</field>
         	<field name="report_type">qweb-pdf</field>
-        	<field name="report_name">label_4devnet.report_label-2</field>
+        	<field name="report_name">label_4devnet.report_label_2</field>
         	<field name="paperformat_id" ref="report_page_2"/>
-        </record>-->
+		<field name="report_file">label_4devnet.report_label_2</field>
+        </record>
          <record id="report_page_3" model="report.paperformat">           
             <field name="name">Label 4*1</field>
             <field name="format">custom</field>
@@ -64,13 +66,14 @@
             <field name="dpi">90</field>
             <field name="report_ids">Custom-Label 4*1</field>            
         </record> 
-       <!-- <record id="paper_3" model="ir.actions.report.xml"> 
+       <record id="partner_label" model="ir.actions.report.xml"> 
         	<field name="name">Custom-Label 4*1</field>
         	<field name="model">res.partner</field>
         	<field name="report_type">qweb-pdf</field>
         	<field name="report_name">label_4devnet.report_partner_label</field>
         	<field name="paperformat_id" ref="report_page_3"/>
-        </record> -->
+		<field name="report_file">label_4devnet.report_partner_label</field>
+        </record> 
       </data>
       </openerp>  
 

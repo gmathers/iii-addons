@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    	<report 
+    <!--	<report 
             string="Custom-Label 4*2" 
             id="report_label" 
             model="sale.order" 
             report_type="qweb-pdf"
             name="label_4devnet.report_label_1" 
             file="label_4devnet.report_label"
+	    paperformat_id="report_page_1"
     		/>  
          
     		<report 
@@ -16,17 +17,43 @@
             model="sale.order" 
             report_type="qweb-pdf"
             name="label_4devnet.report_label-2" 
-            file="label_4devnet.report_label_2" />
+            file="label_4devnet.report_label_2" 
+	    paperformat_id="report_page_2"
+		/>
     			
            <report 
-            header="False"
             string="Custom-Label 4*1" 
             id="partner_label" 
             model="res.partner" 
             report_type="qweb-pdf"
             name="label_4devnet.report_partner_label" 
-            file="label_4devnet.partner_label"/>  	 
-    		
+            file="label_4devnet.partner_label"
+	    paperformat_id="report_page_3"
+		/>  	 -->
+    	
+    	<record id="view_order_form_custom" model="ir.ui.view">
+            <field name="name">view.order.form.custom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml"> 
+            	<button name="print_quotation" string="Print" type="object" states="sent,progress,manual" groups="base.group_user" position="after">            		
+            		 <button name="print_label_1" string="Print Label 4*2" type="object" />
+            		 <button name="print_label_2" string="Print Label 6*4" type="object" />
+            	</button>
+            </field>
+        </record>  
+
+    	<record id="view_partner_form_custom" model="ir.ui.view">
+            <field name="name">view.partner.form.custom</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml"> 
+				<div class="oe_right oe_button_box" name="buttons" position="inside" >          		
+            		 <button name="print_label_1" string="Print Label 4*1" type="object" />
+            	</div>
+            </field>
+        </record>  
+	
    	
 	</data>
 </openerp>

@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp> 
-	<data>
-		<template id="report_label-2">
-			<t t-call="report.html_container">
-				<t t-foreach="docs" t-as="o1">				
+  
+<data>
+	<template id="report_label_2">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o1">				
+				
 					<div class="page">
 						<table style="border-spacing: 2px;"> 
 							<tbody>
-								<tr>
-									<td style="font-weight:bold;font-size:60px;font-family:arial;text-align:left">
-										<span t-field="o1.partner_id"/><newline/>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding-top:20px;font-family:arial;text-align:left;font-size:40px;">
-										Tel# <span t-field="o1.partner_id.phone"/><br/>
-									</td>
-								</tr>
-								<tr>	
-									<td style="padding-top:20px;font-family:arial;text-align:left;font-weight:bold;font-size:140px">
-										<span t-field="o1.name"/>
-									</td>
-								</tr>
+                            		<tr>
+                            			<td style="font-weight:bold;font-size:60px;font-family:arial;text-align:left">
+                            				<span t-field="o1.partner_id"/><newline/>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td style="padding-top:20px;font-family:arial;text-align:left;font-size:40px;">
+                            				Tel# <span t-field="o1.partner_id.phone"/><br/>
+                            			</td>
+                            		</tr>
+                            		<tr>	
+                            			<td style="padding-top:20px;font-family:arial;text-align:left;font-weight:bold;font-size:140px">
+                            				<span t-field="o1.name"/>
+                            			</td>
+									</tr>
 							</tbody>	
 						</table>
 					</div>			 
-				</t> 
+				
+			</t> 
 			</t>
-		</template>
-	</data>
+	</template>
+</data>
 </openerp>
-
+   
 
 

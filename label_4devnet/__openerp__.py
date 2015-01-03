@@ -27,7 +27,7 @@
   #  'sequence': 19,
   #  'summary': 'Purchase Orders, Receptions, Supplier Invoices',
     'description': """
-    This module For Label Print.    
+    This module will print different size labels on Sale Order and Partner.    
     """,
     'author': '4devnet.com',
     'website': 'http://www.4devnet.com',
@@ -38,7 +38,7 @@
         'label.xml',
         'views/report_label.xml',
         'views/report_label_2.xml',
-        'views/partner_label.xml',
+        'views/report_partner_label.xml',
     ],
     'installable': True,
     'auto_install': False,
