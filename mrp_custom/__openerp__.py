@@ -27,7 +27,7 @@
   #  'sequence': 19,
   #  'summary': 'Purchase Orders, Receptions, Supplier Invoices',
     'description': """    
-    For customized Partner & product screen with button link to mrp_repair.
+    For customized Partner & product screen with button link to Repair Order.
     """,
     'author': '4devnet.com',
     'website': 'http://www.4devnet.com',

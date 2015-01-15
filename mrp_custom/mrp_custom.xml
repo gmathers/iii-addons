@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>  
-    	<!--<record id="product_form_view_repair_order_button" model="ir.ui.view">
-            <field name="name">product.template.repair.order</field>
-            <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_only_form_view"/>
-            <field name="arch" type="xml">
-            	<xpath expr="//div[@name='buttons']" position="inside">
-    				<button class="oe_inline oe_stat_button" name="action_view_repair" 
-    					icon="fa-bug" type="action">
-						<field string="Repairs" name="repair_count" widget="statinfo"/>
-					</button>
-				</xpath>
-            </field>		
-    	</record>  --> 
+    	
     	<record id="action_repair_order_tree_4devnet" model="ir.actions.act_window">
             <field name="name">Repair Orders 4devnet</field>
             <field name="type">ir.actions.act_window</field>
@@ -33,14 +21,14 @@
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='buttons']" position="inside">                    
                 	<button class="oe_inline oe_stat_button" name="%(action_repair_order_tree_4devnet)d" 
-    					icon="fa-bug" type="action">
+    					icon="fa-stethoscope" type="action">
 						<field string="Repairs" name="repair_count" widget="statinfo"/>
 					</button>
                 </xpath>                
             </field>
         </record>
 <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->    	
-    <record id="action_repair_order_tree_4devnet2" model="ir.actions.act_window">
+    <!--<record id="action_repair_order_tree_4devnet2" model="ir.actions.act_window">
             <field name="name">Repair Orders 4devnet</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">mrp.repair</field>
@@ -49,19 +37,16 @@
             <field name="context">{'search_default_partner_id':active_id}</field>            
             <field name="view_mode">tree,form</field>
             <field name="search_view_id_4devnet2" ref="mrp_repair.view_repair_order_form_filter"/>
-        </record>  
+        </record> -->  
 	<record id="view_partner_form_inherit_mrp_4devnet" model="ir.ui.view">
 			<field name="name">res.partner.form.inherit.mrp.4devnet</field>
 			<field name="model">res.partner</field>
 			<field name="inherit_id" ref="base.view_partner_form"/>			
 			<field name="arch" type="xml"> 
 				<xpath expr="//div[@name='buttons']" position="inside">
-    				<button  attrs="{'invisible': [('customer','=', False),('is_company','=',True)]}" class="oe_inline oe_stat_button" name="action_view_repair" icon="fa-bug" type="object">
+    				<button  context="{'search_default_partner_id': active_id,'default_partner_id': active_id}" attrs="{'invisible': [('customer','=', False),('is_company','=',True)]}" class="oe_inline oe_stat_button" name="action_view_repair" icon="fa-stethoscope" type="object">
 						<field  string="Repairs" name="repair_count" widget="statinfo"/>
-					</button>
-					<!--<button  attrs="{'invisible': [('customer','=', False),('is_company','=', False)]}" class="oe_inline oe_stat_button" name="action_view_repair2" icon="fa-bug" type="object">
-						<field  string="Repairs2" name="repair_count2" widget="statinfo"/>
-					</button>  -->
+					</button>					
 				</xpath>
 			</field>
 	</record>				
