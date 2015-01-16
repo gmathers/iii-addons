@@ -14,13 +14,37 @@ from openerp.osv.orm import browse_record, browse_null
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT, DATETIME_FORMATS_MAP
 from openerp.osv import fields,osv
  
+class product_template(osv.Model):
+    _inherit = 'product.template'
+    
+    def action_view_repair(self, cr, uid, ids, context=None):
+        act_obj = self.pool.get('ir.actions.act_window')
+        mod_obj = self.pool.get('ir.model.data')
+        product_ids = []
+        for template in self.browse(cr, uid, ids, context=context):
+            product_ids += [x.id for x in template.product_variant_ids]
+        result = mod_obj.xmlid_to_res_id(cr, uid, 'mrp_repair.action_repair_order_tree',raise_if_not_found=True)
+        result = act_obj.read(cr, uid, [result], context=context)[0]
+        result['domain'] = "[('product_id','in',[" + ','.join(map(str, product_ids)) + "]),('state', '!=', 'cancel')]"
+        return result
+    
+    def _repair_count(self, cr, uid, ids, field_name, arg, context=None):
+        res = dict.fromkeys(ids, 0)
+        for template in self.browse(cr, uid, ids, context=context):
+            res[template.id] = sum([p.repair_count for p in template.product_variant_ids])
+        return res
+     
+    _columns = {
+                    'repair_count': fields.function(_repair_count, string='# REpair', type='integer'), 
+                } 
+    
 class product_product(osv.Model):
     _inherit = 'product.product'
     
     def _repair_count(self, cr, uid, ids, field_name, arg, context=None):
         OrderRepair = self.pool['mrp.repair']
         return {
-            product_id: OrderRepair.search_count(cr,uid, [('product_id', '=', product_id),('state', '=', 'done')], context=context)
+            product_id: OrderRepair.search_count(cr,uid, [('product_id', '=', product_id),('state', '!=', 'cancel')], context=context)
             for product_id in ids
         }   
     
@@ -52,7 +76,7 @@ class res_partner(osv.osv):
 #                 print child[0]
                 partner_ids.append(child[0])
         return {
-            partner_id: OrderRepair.search_count(cr,uid, [('partner_id', '=', res_child + partner_ids),('state', '=', 'done')], context=context)
+            partner_id: OrderRepair.search_count(cr,uid, [('partner_id', '=', res_child + partner_ids),('state', '!=', 'cancel')], context=context)
             for partner_id in ids
                 }
         
@@ -81,7 +105,7 @@ class res_partner(osv.osv):
 #         print '1111111111_______________________'
         result = act_obj.read(cr, uid, [result], context=context)[0]
 #         print result      
-        result['domain'] = "[('partner_id','in',[" + ','.join(map(str, partner_ids)) + "]),('state', '=', 'done')]"
+        result['domain'] = "[('partner_id','in',[" + ','.join(map(str, partner_ids)) + "]),('state', '!=', 'cancel')]"
 #         print result['domain']      
         return result
 
@@ -106,6 +130,6 @@ class res_partner(osv.osv):
         'repair_ids': fields.one2many('mrp.repair','partner_id','Repaired Order')
     }
 
-class mrp_repair(osv.osv):    
-    _inherit = 'mrp.repair'
+# class mrp_repair(osv.osv):    
+#     _inherit = 'mrp.repair'
     
