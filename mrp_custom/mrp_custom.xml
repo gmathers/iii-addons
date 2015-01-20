@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>   
-		
+    <data> 
+    	
+    	<record id="view_repair_order_form_4devnet" model="ir.ui.view">
+        	<field name="name">mrp.repair.form.4devnet</field>
+        	<field name="model">mrp.repair</field>
+    		<field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+    	  		<field name="partner_id" position="after">
+    	  			<field name="technician"/>
+    	  		</field>            	            	
+            </field>
+       </record>
+            	
+<!--   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   -->		
     	<record model="ir.ui.view" id="repair_button_view_4devnet">
             <field name="name">product.templater.repair.order.button</field>
             <field name="model">product.template</field>

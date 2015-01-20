@@ -130,6 +130,15 @@ class res_partner(osv.osv):
         'repair_ids': fields.one2many('mrp.repair','partner_id','Repaired Order')
     }
 
-# class mrp_repair(osv.osv):    
-#     _inherit = 'mrp.repair'
-    
+class mrp_repair(osv.osv): 
+       
+     _inherit = 'mrp.repair'
+     _columns = {
+                 'technician':fields.many2one('res.users','Technician')                 
+                 }
+     _defaults = {        
+                    'technician': lambda self, cr, uid, c: uid,
+                 }
+        
+        
+        
