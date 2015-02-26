@@ -7,7 +7,6 @@ class res_partner(models.Model):
     p_user_id = fields.Many2one('res.users', related='parent_id.user_id', string='Parent Salesperson')
     p_city = fields.Char(related='parent_id.city', string='Parent City')
     p_state_id = fields.Many2one('res.country.state', related='parent_id.state_id', string='Parent Province')
-    p_fax = fields.Char  (related='parent_id.fax', string='Parent Fax')
 
     def search(self, cr, user, args, offset=0, limit=None, order=None, context=None, count=False):
         if not (context and context.get('parent_search_applied')):
