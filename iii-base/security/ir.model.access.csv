@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iii-base_iii-base,iii-base.iii-base,model_iii-base_iii-base,,1,0,0,0
