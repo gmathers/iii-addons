@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="inherit_view_crm_case_opportunities_filter" model="ir.ui.view">
+            <field name="name">CRM - Opportunities Search Inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="filter[@string='New Mail']" position="after">
+                    <filter string="Action Today" name="action_today" domain="[('date_action','&lt;=', ((context_today()).strftime('%Y-%m-%d')))]" help="Opps with Next Action Due on or before today"/>
+                    <filter string="Action This Week" name="action_this_week" domain="[('date_action','&lt;=', (context_today()+relativedelta(days=7)).strftime('%Y-%m-%d'))]" help="Opportunities with Next Actions Due on or before this week"/>
+                    <filter string="No Action Date Set" name="no_action_set" domain="[('date_action','=',False)]"/>
+                </xpath>
+                <xpath expr="//filter[@string='Country']" position="after">
+                    <filter string="Province" context="{'group_by':'state_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
