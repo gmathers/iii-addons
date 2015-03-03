@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="inherit_view_crm_case_phonecalls_filter">
+            <field name="name">CRM - Phone Calls Search</field>
+            <field name="model">crm.phonecall</field>
+            <field name="inherit_id" ref="crm.view_crm_case_phonecalls_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="filter[@string='My Phonecalls']" position="replace">
+                    <filter string="My Phonecalls" name="my_phonecalls" domain="[('user_id', '=', uid)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="crm.crm_case_categ_phone_outgoing0">
+            <field name="context">{'search_default_my_phonecalls':1}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="crm.crm_case_categ_phone_incoming0">
+            <field name="context">{'search_default_my_phonecalls':1, 'search_default_state': 'done', 'default_state': 'done'}</field>
+        </record>
+
+    </data>
+</openerp>
