@@ -7,7 +7,7 @@
     'description': """
         Custom Filters and Groups on CRM Opportunities Kanban View
     """,
-    'depends' : ['base', 'crm'],
+    'depends' : ['base', 'sale_crm'],
     'data':[
         'views.xml',
         ],
