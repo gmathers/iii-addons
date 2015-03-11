@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <menuitem name="Repair Shop"
+            id="base.menu_mrp_root"
+            sequence="80"/>
+
+        <menuitem action="mrp.mrp_production_action"
+            id="mrp.menu_mrp_production_action"
+            parent="mrp.menu_mrp_manufacturing"
+            sequence="60"/>
+
+        <record model="ir.ui.view" id="inherit_view_repair_order_form_filter">
+            <field name="name">mrp.repair.select</field>
+            <field name="model">mrp.repair</field>
+            <field name="inherit_id" ref="mrp_repair.view_repair_order_form_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@string='Reair Orders']" position="replace">
+                    <field name="name" string="Repair Orders"/>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="after">
+                    <filter string="Open Repairs" name="open_repairs" domain="[('state', '!=', 'cancel'),('state', '!=', 'done')]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="mrp_repair.action_repair_order_tree">
+            <field name="context">{'search_default_open_repairs':1}</field>
+        </record>
+
+        <record id="view_repair_order_form_4devnet" model="ir.ui.view">
+        	<field name="name">mrp.repair.form.4devnet</field>
+        	<field name="model">mrp.repair</field>
+    		<field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+    	  		<field name="location_id" position="before">
+    	  			<field name="technician"/>
+    	  		</field>
+                <xpath expr="//page[@string='Notes']" position="replace"></xpath>
+                <xpath expr="//page[@string='Operations']" position="before">
+                    <page string="Notes">
+                        <field name="internal_notes" placeholder="Add internal notes..."/>
+                        <field name="quotation_notes" placeholder="Add quotation notes..."/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</openerp>
+
+
