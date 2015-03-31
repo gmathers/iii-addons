@@ -22,6 +22,33 @@ class mrp_repair(models.Model):
 
         res = []
         for r in self.browse(cr, uid, ids, context=context):
-            name = '%s [%s]' % (r.name, r.partner_id.display_name)
+            rman = r.name
+            rmap = r.partner_id.display_name
+            if rmap:
+                name = rman + ' / ' + rmap
+            else:
+                name = rman
+            # name = '%s [%s]' % (r.name, r.partner_id.display_name)
             res.append((r.id, name))
         return res
+
+    def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=100):
+        if not args:
+            args = []
+        if not context:
+            context = {}
+        if name:
+            # Be sure name_search is symmetric to name_get
+            ids = []
+            name_splited = name.split('/')
+            if len(name_splited) > 1:
+                rman = name_splited[0]
+                rmap = name_splited[1]
+                ids += self.search(cr, uid, [('name', operator, rman),('partner_id.display_name', operator, rmap)] + args, limit=limit, context=context)
+            else:
+                ids += self.search(cr, uid, ['|',('name', operator, name),('partner_id.display_name', operator, name)] + args, limit=limit, context=context)
+        else:
+            ids = self.search(cr, uid, args, limit=limit, context=context)
+        return self.name_get(cr, uid, ids, context)
+
+
