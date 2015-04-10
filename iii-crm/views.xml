@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
+    
+        <record id="view_partners_form_crm1" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="crm.view_partners_form_crm1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(crm.crm_case_category_act_oppor11)d']" position="attributes">
+                    <attribute name="name">%(crm.relate_partner_opportunities)d</attribute>
+                </xpath>
+            </field>
+        </record>
+        
         <record id="inherit_view_crm_case_opportunities_filter" model="ir.ui.view">
             <field name="name">CRM - Opportunities Search Inherit</field>
             <field name="model">crm.lead</field>
