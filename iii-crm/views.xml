@@ -42,13 +42,17 @@
                             <field name="name"/>
                         </div>
                         <div style="padding-left: 0.5em">
-                            <t t-if="record.date_deadline.raw_value and record.date_deadline.raw_value lt (new Date())" t-set="red">oe_kanban_text_red</t>
+                            <t t-if="record.date_deadline.raw_value and record.date_deadline.raw_value lt (new Date())"
+                               t-set="red">oe_kanban_text_red</t>
                             <span t-attf-class="#{red || ''}"><field name="date_action"/></span>
                             <t t-if="record.date_action.raw_value"> : </t>
                             <field name="title_action"/>
                         </div>
                         <div class="oe_kanban_bottom_right">
-                            <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar pull-right"/>
+                            <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)"
+                                 t-att-title="record.user_id.value"
+                                 width="24" height="24"
+                                 class="oe_kanban_avatar pull-right"/>
                             <div class="pull-left" groups="base.group_user">
                                 <field name="priority" widget="priority"/>
                             </div>
@@ -61,5 +65,22 @@
             </field>
         </record>
 
+        <!-- Inherit Form View to Modify it -->
+        <record id="crm_case_form_view_leads_iii" model="ir.ui.view">
+            <field name="name">CRM - Leads Form Inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='stage_id']" position="replace">
+                    <field name="stage_id"
+                           widget="statusbar"
+                           clickable="True"
+                           options="{'fold_field': 'fold'}"
+                           domain="['&amp;', '|', ('case_default', '=', True), ('section_ids', '=', section_id), '|', ('type', '=', type), ('type', '=', 'both')]"/>
+                </xpath>
+
+            </field>
+        </record>
     </data>
 </openerp>
